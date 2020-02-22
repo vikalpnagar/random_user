@@ -1,0 +1,88 @@
+{
+  "@@last_modified": "2020-02-22T23:42:57.462103",
+  "appTitle": "Random User",
+  "@appTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "homeTitle": "Random User",
+  "@homeTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "mapTitle": "Map",
+  "@mapTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "noDataToShow": "Nothing to show here.\nTry refreshing the page.",
+  "@noDataToShow": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "refreshButton": "Refresh",
+  "@refreshButton": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "errorDialogTitle": "An error occurred!",
+  "@errorDialogTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "errorDialogMsg": "Something went wrong.",
+  "@errorDialogMsg": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "errorDialogMsgNoInternet": "Looks like you do not have active internet connection.",
+  "@errorDialogMsgNoInternet": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "errorDialogButton": "Okay",
+  "@errorDialogButton": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "nameLabel": "Name",
+  "@nameLabel": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "genderLabel": "Gender",
+  "@genderLabel": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "emailLabel": "Email",
+  "@emailLabel": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "phoneLabel": "Phone",
+  "@phoneLabel": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "cellLabel": "Cell",
+  "@cellLabel": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "dobLabel": "DOB",
+  "@dobLabel": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "addressLabel": "Address",
+  "@addressLabel": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "currentLocation": "Currently, You are here!!!",
+  "@currentLocation": {
+    "type": "text",
+    "placeholders": {}
+  }
+}
