@@ -1,6 +1,11 @@
 # random_user
 
-A Flutter app with randomuser.me API integration
+A Flutter app demonstrating integration with randomuser.me API and Google Maps.
+
+Screens-
+![Random User With Refresh](https://github.com/vikalpnagar/random_user/blob/master/screenshots/1.%20Random-User.png)
+![Application Navigation Drawer](https://github.com/vikalpnagar/random_user/blob/master/screenshots/2.%20App-Drawer.png)
+![Google Map With Current Location](https://github.com/vikalpnagar/random_user/blob/master/screenshots/3.%20Map-with-current-location.png)
 
 ## Getting Started
 
