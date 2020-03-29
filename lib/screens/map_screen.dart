@@ -14,9 +14,16 @@ class MapScreen extends StatefulWidget {
 }
 
 class _MapScreenState extends State<MapScreen> {
+  // Controller gives access to google map features once it's ready
   final Completer<GoogleMapController> _controller = Completer();
+
+  // Entry point to access device location
   Location location;
+
+  // Markers that will be plotted on map
   Set<Marker> currentLocationMarker = Set<Marker>();
+
+  // Will be used to close location stream after dispose
   StreamSubscription locationStreamSubscription;
 
   @override
@@ -25,43 +32,48 @@ class _MapScreenState extends State<MapScreen> {
     initLocationOfUser();
   }
 
+  /// Handles configuration and fetching location
   Future<void> initLocationOfUser() async {
+    // Entry point to access device location
     location = new Location();
+
+    // Ask for location after every 30 secs
     location.changeSettings(interval: 30000);
 
+    // Check location permission
     bool hasLocationPermission = await location.hasPermission();
 
     bool permissionGranted = true;
 
+    // Ask for location permission
     if (!hasLocationPermission) {
       permissionGranted = await location.requestPermission();
     }
 
     if (permissionGranted) {
+      // Get the current location
       LocationData currentLocation = await location.getLocation();
-      print(
-          "initLocationOfUser: currentLocation--->${currentLocation
-              .latitude}, ${currentLocation.longitude}");
       if (mounted && currentLocation != null) {
         onLocationChanged(currentLocation);
       }
 
-      locationStreamSubscription = location.onLocationChanged().listen((LocationData locationData) {
-        print(
-            "initLocationOfUser: onLocationChanged--->${locationData
-                .latitude}, ${locationData.longitude}");
-        if (mounted)
-          onLocationChanged(locationData);
+      // Setup listener when user's current location is changed
+      locationStreamSubscription =
+          location.onLocationChanged().listen((LocationData locationData) {
+        if (mounted) onLocationChanged(locationData);
       });
     }
   }
 
+  /// Plot user's current location on map as a marker
   Future<void> onLocationChanged(LocationData locationData) async {
     if (locationData != null) {
+      // Prepare new location
       LatLng newLoc = LatLng(locationData.latitude, locationData.longitude);
 
       GoogleMapController googleMapController = await _controller.future;
 
+      // Animate map to new camera position
       googleMapController.animateCamera(
         CameraUpdate.newCameraPosition(
           CameraPosition(target: newLoc, zoom: 12.0),
@@ -69,14 +81,13 @@ class _MapScreenState extends State<MapScreen> {
       );
 
       setState(() {
+        // Clear previous location and push new one
         currentLocationMarker.clear();
         currentLocationMarker.add(Marker(
           markerId: MarkerId("current-loc"),
           position: newLoc,
           infoWindow:
-          InfoWindow(title: AppLocalizations
-              .of(context)
-              .currentLocation),
+              InfoWindow(title: AppLocalizations.of(context).currentLocation),
         ));
       });
     }
@@ -85,28 +96,31 @@ class _MapScreenState extends State<MapScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const AppDrawer(),
+      drawer: const AppDrawer(AppDrawer.MAP_POS),
       appBar: _buildAppBar(context),
-      body: _buildGoogleMap(),
+      body: WillPopScope(
+          onWillPop: () async {
+            await Navigator.of(context).pushReplacementNamed("/");
+            return false;
+          },
+          child: _buildGoogleMap()),
     );
   }
 
-  AppBar _buildAppBar(BuildContext context) =>
-      AppBar(
+  AppBar _buildAppBar(BuildContext context) => AppBar(
         title: Text(
-          AppLocalizations
-              .of(context)
-              .mapTitle,
+          AppLocalizations.of(context).mapTitle,
           overflow: TextOverflow.ellipsis,
         ),
       );
 
-  Widget _buildGoogleMap() {
+  GoogleMap _buildGoogleMap() {
     return GoogleMap(
       mapType: MapType.normal,
       markers: currentLocationMarker,
       initialCameraPosition:
-      const CameraPosition(target: LatLng(20.5937, 78.9629), zoom: 4),
+          const CameraPosition(target: LatLng(20.5937, 78.9629), zoom: 4),
+      // Initial camera position to India
       onMapCreated: (GoogleMapController controller) {
         _controller.complete(controller);
       },
@@ -116,6 +130,8 @@ class _MapScreenState extends State<MapScreen> {
   @override
   void dispose() {
     super.dispose();
+
+    // Cancel location stream
     locationStreamSubscription?.cancel();
   }
 }

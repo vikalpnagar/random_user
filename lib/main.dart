@@ -50,44 +50,46 @@ class RandomUserApp extends StatelessWidget {
     );
   }
 
+  /// Theme configuration
   ThemeData _buildThemeData() => ThemeData(
-    primarySwatch: Colors.blue,
-    accentColor: Colors.cyan,
-    fontFamily: 'OpenSans',
-    textTheme: ThemeData.light().textTheme.copyWith(
-      title: const TextStyle(
-        fontFamily: 'Raleway',
-        fontSize: 18,
-      ),
-      subtitle: const TextStyle(
-        fontFamily: 'Raleway',
-        fontSize: 16,
-        color: Colors.white,
-      ),
-      button: const TextStyle(
-        color: Colors.white,
-        fontWeight: FontWeight.bold,
-      ),
-      subhead: const TextStyle(
-        fontFamily: 'Raleway',
-        fontSize: 16,
-      ),
-      body1: const TextStyle(),
-      caption: const TextStyle(),
-    ),
-    buttonTheme: ThemeData.light().buttonTheme.copyWith(
-      buttonColor: Colors.cyan,
-    ),
-    appBarTheme: AppBarTheme(
-      textTheme: ThemeData.light().textTheme.copyWith(
-        title: const TextStyle(
-          fontFamily: 'OpenSans',
-          fontSize: 18,
+        primarySwatch: Colors.blue,
+        accentColor: Colors.cyan,
+        fontFamily: 'OpenSans',
+        textTheme: ThemeData.light().textTheme.copyWith(
+              title: const TextStyle(
+                fontFamily: 'Raleway',
+                fontSize: 18,
+              ),
+              subtitle: const TextStyle(
+                fontFamily: 'Raleway',
+                fontSize: 16,
+                color: Colors.white,
+              ),
+              button: const TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+              subhead: const TextStyle(
+                fontFamily: 'Raleway',
+                fontSize: 16,
+              ),
+              body1: const TextStyle(),
+              caption: const TextStyle(),
+            ),
+        buttonTheme: ThemeData.light().buttonTheme.copyWith(
+              buttonColor: Colors.cyan,
+            ),
+        appBarTheme: AppBarTheme(
+          textTheme: ThemeData.light().textTheme.copyWith(
+                title: const TextStyle(
+                  fontFamily: 'OpenSans',
+                  fontSize: 18,
+                ),
+              ),
         ),
-      ),
-    ),
-  );
+      );
 
+  /// Creates IOClient with connection timeout of 10 seconds
   IOClient _createIOClient() {
     final httpClient = HttpClient();
     httpClient.connectionTimeout = const Duration(seconds: 10);

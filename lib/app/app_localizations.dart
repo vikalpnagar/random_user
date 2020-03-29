@@ -5,6 +5,7 @@ import 'package:random_user/l10n/messages_all.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+/// A class holding messages that will be translated based on supplied locale
 class AppLocalizations {
   final String _localeName;
 
@@ -74,10 +75,11 @@ class AppLocalizations {
   String get addressLabel =>
       Intl.message("Address", name: "addressLabel", locale: _localeName);
 
-  String get currentLocation =>
-      Intl.message("Currently, You are here!!!", name: "currentLocation", locale: _localeName);
+  String get currentLocation => Intl.message("Currently, You are here!!!",
+      name: "currentLocation", locale: _localeName);
 }
 
+/// A delegate class to handle locale change of device
 class AppTranslationsDelegate extends LocalizationsDelegate<AppLocalizations> {
   const AppTranslationsDelegate();
 

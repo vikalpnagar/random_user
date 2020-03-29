@@ -3,6 +3,7 @@ import 'package:random_user/models/user.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+/// A stateless widget showing user info based on supplied user
 class UserDetail extends StatelessWidget {
   final User _user;
 
@@ -13,11 +14,14 @@ class UserDetail extends StatelessWidget {
     return _buildUserInfoView(context);
   }
 
-  Widget _buildUserInfoView(BuildContext context) => Scrollbar(
+  Scrollbar _buildUserInfoView(BuildContext context) => Scrollbar(
           child: ListView(
         padding: const EdgeInsets.all(8.0),
         children: <Widget>[
+          // Builds User Image
           _buildUserImage(_user.picture.large),
+
+          // Builds User Name
           Card(
             color: Theme.of(context).accentColor,
             child: ListTile(
@@ -27,6 +31,8 @@ class UserDetail extends StatelessWidget {
                   _buildListSubtitleText(context, _user.name?.name ?? '--'),
             ),
           ),
+
+          // Builds User Gender
           Card(
             color: Theme.of(context).accentColor,
             child: ListTile(
@@ -35,6 +41,8 @@ class UserDetail extends StatelessWidget {
               subtitle: _buildListSubtitleText(context, _user.gender ?? '--'),
             ),
           ),
+
+          // Builds User Email
           Card(
             color: Theme.of(context).accentColor,
             child: ListTile(
@@ -43,6 +51,8 @@ class UserDetail extends StatelessWidget {
               subtitle: _buildListSubtitleText(context, _user.email ?? '--'),
             ),
           ),
+
+          // Builds User Phone
           Card(
             color: Theme.of(context).accentColor,
             child: ListTile(
@@ -51,6 +61,8 @@ class UserDetail extends StatelessWidget {
               subtitle: _buildListSubtitleText(context, _user.phone ?? '--'),
             ),
           ),
+
+          // Builds User Cell
           Card(
             color: Theme.of(context).accentColor,
             child: ListTile(
@@ -59,6 +71,8 @@ class UserDetail extends StatelessWidget {
               subtitle: _buildListSubtitleText(context, _user.cell ?? '--'),
             ),
           ),
+
+          // Builds User DOB
           Card(
             color: Theme.of(context).accentColor,
             child: ListTile(
@@ -68,6 +82,8 @@ class UserDetail extends StatelessWidget {
                   context, _user.dob?.dateTimeWithAge ?? '--'),
             ),
           ),
+
+          // Builds User Address
           Card(
             color: Theme.of(context).accentColor,
             child: ListTile(
@@ -80,6 +96,7 @@ class UserDetail extends StatelessWidget {
         ],
       ));
 
+  /// Fetches and builds user image
   Widget _buildUserImage(String url) => Align(
         alignment: Alignment.center,
         child: ClipRRect(

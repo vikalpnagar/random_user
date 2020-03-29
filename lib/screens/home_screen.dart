@@ -6,12 +6,14 @@ import 'package:random_user/widget/user_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+/// Screen to show user data
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  // Will be used by FutureBuilder to track if new user info is downloaded
   Future<void> _futureFetchNewUser;
 
   @override
@@ -23,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const AppDrawer(),
+      drawer: const AppDrawer(AppDrawer.HOME_POS),
       appBar: _buildAppBar(),
       body: _buildBody(),
     );
@@ -104,17 +106,20 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       );
 
+  /// Asks UserProvider to fetch new user info
   Future<void> _fetchNewUser() {
     var fetchNewUser =
         Provider.of<UserProvider>(context, listen: false).fetchNewUser();
     return fetchNewUser.catchError((error) async {
       if (mounted)
+        // Shows an error dialog in case exception occurs
         await NetworkUtil.isActiveInternetAvailable().then((available) {
           showErrorDialog(!available);
         });
     });
   }
 
+  /// Shows an error dialog
   void showErrorDialog(bool noInternet) {
     var appLocalizations = AppLocalizations.of(context);
     showDialog(

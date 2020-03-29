@@ -6,6 +6,7 @@ class NetworkUtil {
   static const String SERVER_URL = "https://randomuser.me/";
   static const String USER_SEGMENT = "api";
 
+  /// Check if network connectivity is available
   static Future<bool> checkNetworkConnectivity() async {
     var connectivityResult = await (Connectivity().checkConnectivity());
     if (connectivityResult == ConnectivityResult.none) {
@@ -14,6 +15,7 @@ class NetworkUtil {
     return true;
   }
 
+  /// Check if active internet connection is available
   static Future<bool> isActiveInternetAvailable() async {
     return checkNetworkConnectivity().then((available) async {
       if (available) {
